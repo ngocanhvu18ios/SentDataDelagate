@@ -8,8 +8,16 @@
 
 import UIKit
 
+protocol MasterDelegate: class {
+    func sentData(data: String)
+    
+}
 class ViewController: UIViewController {
-
+    
+    
+    @IBOutlet weak var nameText: UITextField!
+    
+    weak var delegate: MasterDelegate?
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
@@ -20,6 +28,10 @@ class ViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
 
-
+    @IBAction func save(_ sender: UIButton) {
+        delegate?.sentData(data: nameText.text ?? "")
+        navigationController?.popViewController(animated: true)
+    }
+    
 }
 
